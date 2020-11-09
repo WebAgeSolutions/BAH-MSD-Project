@@ -1,0 +1,74 @@
+Project Overview
+------------------------------------
+1. Micro services development : Code + configuration ---> Gradle build --> package (.jar)
+-- dataapi
+url: http://<hostname>:8080/api
+-- authapi
+url: http://<hostname>:8081/account
+
+2. Test REST end points with postman
+-- dataapi - REST operations: GET | POST | PUT | DELETE 
+http://<hostname>:8080/api/customers
+http://<hostname>:8080/api/events
+http://<hostname>:8080/api/registrations
+-- authapi
+http://<hostname>:8081/account/token
+http://<hostname>:8081/account/register
+
+3. Front-end client - authapi - dataapi integration
+Test login, register 
+Test REST operations with the react app UI
+http://<hostname>:3000/customers
+http://<hostname>:3000/events
+http://<hostname>:3000/registrations
+
+4. Docker containerize the apps and test
+- Docker images for dataapi and authapi
+- Run docker containers
+- use the postman to test
+- use the reactapp to test
+	
+5. Set up a kubernetes cluster for applications deployments: [dataapi, authapi, reactapp] 
+Your Kubernetes Cluster
+-- dataapi deployments
+-- authapi deployments
+-- reactapp deployments
+
+-- dataapi pods
+-- authapi pods
+-- reactapp pods
+
+- Create replicasets to run muiltiple pods for each service
+- Use appropriate load balancing strategy to demo the load balancing
+
+6. Design and implements a centralized logging stack to
+- Send the logs from pods to central logging system
+- View the logs of any pods/services
+
+7. Add Service monitoring capabilities to your auth and data service 
+- use Spring Actuator
+- use Prometheus
+
+8. Add distributed tracing capailities to your auth and data service
+- use Yaeger
+- trace the requests to auth service - data service
+	- login requests
+	- register requests
+- trace the requests to data service 
+	- REST ops requests
+
+9. Setup Jenkins on Project VM and run Jenkins
+- Create a Jenkins job to build dataapi project
+- Create a Jenkins job to build authapi project
+- Build a CI-CD pipeline for dataApi and test it
+- Build a CI-CD pipeline for authApi and test it
+
+10. Prepare for Presentation contents and demos
+- contents
+- slides
+- demos - what to run and who will run the demo?
+- I'd suggest you to record * demo OR take screenshots and use it in a document
+   - this will help just in case we experience any unfortunate events during live demo
+	such as last minute service crash OR system crash OR Project VM freeze events
+
+

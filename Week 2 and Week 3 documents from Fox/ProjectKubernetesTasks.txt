@@ -1,0 +1,57 @@
+What is next?
+
+- Set up a kubernetes cluster of dataapi, authapi and reactapp
+- Create replicasets to run muiltiple pods for each service
+- Use appropriate load balancing strategy to demo the load balancing
+- Review the logs
+- Run a demo
+- How to send logs to a centralized logging stack?
+
+Your Kubernetes Cluster
+-- dataapi deployments
+-- authapi deployments
+-- reactapp deployments
+
+-- dataapi pods
+-- authapi pods
+-- reactapp pods
+
+How to do it?
+
+1. Go to <ProjectVM>/labfiles/Sample code for Projects directory.
+2. Review the document: Deploying to Kubernetes and Testing Resiliency.pdf
+Part 3 – step 5 should be:
+kubectl create deployment project-auth --image=project-auth:v1.0
+
+Part 3 – step 6 should be:
+kubectl create deployment project-data --image=project-data:v1.0
+
+Part 6 – step 1 should be:
+kubectl create deployment project-react --image=project-react:v1.0
+
+
+3. Work with your team mates to build a cluster and run the pods
+
+4. Demo: Cluster
+
+https://kubernetes.io/docs/concepts/services-networking/service/
+
+There are four types of Kubernetes services:
+
+ClusterIP. This default type exposes the service on a cluster-internal IP. You can reach the service only from within the cluster.
+
+NodePort. This type of service exposes the service on each node’s IP at a static port. A ClusterIP service is created automatically, and the NodePort service will route to it. From outside the cluster, you can contact the NodePort service by using "<NodeIP>:<NodePort>".
+
+LoadBalancer. This service type exposes the service externally using the load balancer of your cloud provider. 
+The external load balancer routes to your NodePort and ClusterIP services, which are created automatically.
+
+ExternalName. This type maps the service to the contents of the externalName field (e.g., foo.bar.example.com). 
+It does this by returning a value for the CNAME record.
+
+https://kubernetes.io/docs/concepts/storage/volumes/
+
+https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#logs
+
+
+
+

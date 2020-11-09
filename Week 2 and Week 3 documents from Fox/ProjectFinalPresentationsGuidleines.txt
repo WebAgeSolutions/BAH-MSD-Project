@@ -1,0 +1,26 @@
+Final Presentation Guidelines
+
+Every team will be given 20 minutes time.
+All members of the team must participate in the presentation.
+
+Take a back up copy of all code and config and commands and save it.
+Prepare a professional power point presentation with contents including the following slides and more.
+
+1. Topic 
+2. Project Overview
+3. Architecture/Design diagram - brief description
+--I'd draw components diagrams
+4. Tools/Software Environment used
+5. Challenges/Issues/Problems/Your stories
+6. What have you learnt/learned?
+7. What are we missing? -- any suggestions, comments, how to improve?
+8. What else can we do? - future plan- any design and implementation ideas?
+9. Demo
+- postman <--> auth api <--> dataapi
+- client <--> authapi <--> dataapi
+- kubernetes deployment: client <--> authapi <--> dataapi
+- logging to centralized log stack
+- Monitoring with Prometheus, Distributed tracing with Jaeger
+- Jenkins CI-CD pipeline
+10. Questions and answers
+

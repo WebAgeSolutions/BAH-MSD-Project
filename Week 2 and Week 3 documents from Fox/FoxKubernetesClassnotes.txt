@@ -1,0 +1,124 @@
+Good Morning!
+
+DevOps challenges for multiple containers
+
+How to scale?
+How to avoid port conflicts?
+How to manage them in multiple hosts?
+What happens if a host has a trouble?
+How to keep them running?
+How to update them?
+Where are my containers?
+
+We need a software/system that automates
+- deployment
+- scaling
+- management of
+containerzied apps
+
+Kubernetes !
+- open source
+- on-premises
+- public cloud infrastruture
+- private cloud
+- hybrid infrastructure
+can be deployed on 
+- bare-metal machines
+- cluster of virtual machines
+
+https://kubernetes.io/
+https://kubernetes.io/docs/home/
+
+What can we do with Kubernetes?
+- container orchestration !
+- workload management
+- taking care of containers - healthy | unreponsive | restart
+
+OK ! What is in it? 
+
+Kubenetes Components
+https://kubernetes.io/docs/concepts/overview/components/
+
+Master
+    - Node (formerly minion)
+    - Node
+	- docker
+	- * pod
+		- one or more container
+
+
+Master components manage the life cycle of a pod:
+
+apiserver: main component exposing APIs for all the other master components
+scheduler: uses information in the pod spec to decide on which node to run a pod
+controller-manager: responsible for node management (detecting if a node fails), pod replication, and endpoint creation
+etcd: key/value store used for storing all internal cluster data
+
+Cluster
+- A collection of physical resources
+	- hosts
+	- storage
+	- networking
+Namespace
+- a virtual cluster
+A single physical cluster
+	- many virtual clusters segregated by namespaces
+- pods can live in a namespace but nodes can not
+But kubernetes can schedule pods from different namespaces to run on the same node
+
+Can virtual clusters communicate with one another?
+yes. through public interfaces
+
+	   
+The kubelet is the primary "node agent" that runs on each node. It can register the node
+with the apiserver using one of: the hostname; a flag to override the hostname; 
+or specific logic for a cloud provider
+
+https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/#:~:text=Synopsis,object%20that%20describes%20a%20pod.
+
+kubelet: handles all communication between the master and the node on which it is running. 
+It interfaces with the container runtime to deploy and monitor containers
+
+The main Kubelet responsibilities include:
+- Run the pods containers.
+- Report the status of the node and each pod to the API Server.
+- Run container probes.
+- Retrieve container metrics from cAdvisor, aggregate and expose them through the Kubelet Summary API for components (such as Heapster) to consume.
+
+
+kube-proxy: is in charge with maintaining network rules for the node. It also handles communication between pods, nodes, and the outside world.
+Service Proxy
+The Service Proxy runs on each node and is responsible for watching the API Server for changes on services and pods definitions to maintain the entire network configuration up to date, ensuring that one pod can talk to another pod, one node can talk to another node, one container can talk to another container, and so on. Besides, it exposes Kubernetes services and manipulates iptables rules to trap access to services IPs and redirect them to the correct backends (that’s why you can access a NodePort service using any node IP; even if the node you hit is not the one you are looking for, this node will already be set up with the appropriate iptables rules to redirect your request to the correct backend). This provides a highly-available load-balancing solution with low performance overhead.
+
+
+cAdvisor: is an open source agent that monitors resource usage and analyzes the performance of containers.
+cAdvisor
+The Kubelet ships with built-in support for cAdvisor, which collects, aggregates, processes and exports metrics (such as CPU, memory, file and network usage) about running containers on a given node. cAdvisor includes a built-in web interface available on port 4194 (just open your browser and navigate to http://<node-ip>:4194/).
+
+Kubernetes dashboard: gives an overview of the resources running on your cluster. It also gives a very basic means of deploying and interacting with those resources.
+
+Pods: are the basic unit of deployment within Kubernetes. A pod consists of one or more containers that share the same network namespace and IP address.
+
+Services: act like a load balancer. They provide an IP address in front of a pool (set of pods) and also a policy that controls access to them.
+
+ReplicaSets: are controlled by deployments and ensure that the desired number of pods for that deployment are running.
+
+Namespaces: define a logical segregation for different kind of resources like pods and/or services.
+
+Metadata: marks containers based on their deployment characteristics.
+
+Volumes:
+On-disk files in a Container are ephemeral, which presents some problems for non-trivial applications when running in Containers. First, when a Container crashes, kubelet will restart it, but the files will be lost - the Container starts with a clean state. Second, when running Containers together in a Pod it is often necessary to share files between those Containers. The Kubernetes Volume abstraction solves both of these problems.
+
+https://kubernetes.io/docs/concepts/storage/volumes/
+
+https://kubernetes.io/docs/concepts/storage/volumes/#types-of-volumes
+
+etcd
+Consistent and highly-available key value store used as Kubernetes' backing store for all cluster data.
+If your Kubernetes cluster uses etcd as its backing store, make sure you have a back up plan for those data.
+
+https://etcd.io/docs/
+
+
+
